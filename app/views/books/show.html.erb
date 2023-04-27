@@ -1,2 +1,51 @@
-<h1>Books#show</h1>
-<p>Find me in app/views/books/show.html.erb</p>
+<!-- フラッシュメッセージ -->
+<div class="notice">
+  <%= flash[:notice] %>
+</div>
+
+<div class="user">
+  <h2>User info</h2>
+  <p>画像が入る</p>
+  <p><%= @book_detail.user.name %></p>
+  <p>booker</p>
+  <p>introduction</p>
+  <p>設定ボタン</p>
+</div>
+
+
+
+<h2>New book</h2>
+<!-- フォーム -->
+<!-- 本投稿 -->
+<div class="create_book">
+  <%= form_with model: @book do |f| %>
+
+    <!-- タイトル -->
+    <div class="field">
+      <label for="book_title">Title</label>
+      <%= f.text_field :title %>
+    </div>
+
+    <!-- 感想 -->
+    <div class="field">
+      <label for="book_body">Body</label>
+      <%= f.text_area :body %>
+    </div>
+
+  <%= f.submit 'Create Book' %>
+  <% end %>
+</div>
+
+<h2>Book detail</h2>
+<table>
+  <tbody>
+    <tr>
+      <td>imageが入る</td>
+      <td><%= @book_detail.user.name %></td>
+      <td><%= @book_detail.title%></td>
+      <td><%= @book_detail.body%></td>
+      <td><%= link_to "Edit" %></td>
+      <td><%= link_to "Destroy", books_path(@book.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
+    </tr>
+  </tbody>
+</table>

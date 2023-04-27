@@ -13,8 +13,8 @@ class BooksController < ApplicationController
     if @book.save
       #フラッシュメッセージ送信
       flash[:notice] = "Book was successfully created."
-      #ユーザ画面へリダイレクトしたい
-      redirect_to books_path
+      #booksの詳細画面へリダイレクトしたい
+      redirect_to book_path(@book.id)
     else
       @books = Book.all
       render :index
@@ -22,12 +22,19 @@ class BooksController < ApplicationController
   end
 
   def index
-    #UserId取得したい
+    @user = current_user
     @book = Book.new
     @books = Book.all
   end
 
-  def shows
+  def show
+
+    @book = Book.new
+    @book_detail = Book.find(params[:id])
+  end
+
+  def edit
+    @book = Book.find(params[:id])
   end
 
   def update
