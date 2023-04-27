@@ -1,4 +1,17 @@
 <h2>User info</h2>
-<p>name</p>
-<p>Image</p>
-<p>Introduction</p>
+
+<%= form_with model: @user, method: :patch do |f| %>
+
+  <div class="field">
+    <label>Name</label><br>
+    <%= f.text_field :name %>
+  </div>
+
+  <p>Image</p>
+
+  <div class="field">
+    <label>IntroductionI</label>
+
+  </div>
+
+<% end %>
