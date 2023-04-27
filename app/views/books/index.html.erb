@@ -1,0 +1,66 @@
+<!-- フラッシュメッセージ -->
+<div class="notice">
+  <%= flash[:notice] %>
+</div>
+
+<div class="user">
+  <h2>User info</h2>
+  <p>画像が入る</p>
+  <p><%= @user.name %></p>
+  <p>booker</p>
+  <p>introduction</p>
+  <p>設定ボタン</p>
+</div>
+
+
+
+<h2>New book</h2>
+<!--バリデーション-->
+<% if @book.errors.any? %>
+  <%= @book.errors.count %> error prohibited this book from being saved:<br>
+  <ul>
+    <% @book.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<!-- フォーム -->
+<!-- 本投稿 -->
+<div class="create_book">
+  <%= form_with model: @book do |f| %>
+
+    <!-- タイトル -->
+    <div class="field">
+      <label for="book_title">Title</label>
+      <%= f.text_field :title %>
+    </div>
+
+    <!-- 感想 -->
+    <div class="field">
+      <label for="book_body">Body</label>
+      <%= f.text_area :body %>
+    </div>
+
+  <%= f.submit 'Create Book' %>
+  <% end %>
+</div>
+
+
+<!-- テーブル -->
+<h2>Books</h2>
+  <table>
+    <tr>
+      <th>Title</th>
+      <th>Body</th>
+    </tr>
+    <% @books.each do |book| %>
+      <tr>
+        <td><%= book.title %></td>
+        <td><%= book.body %></td>
+        <td><%= link_to "Show", book_path(book.id) %></td>
+        <td><%= link_to "Edit", edit_book_path(book.id) %></td>
+        <td><%= link_to "Destroy",book_path(book.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
+      </tr>
+    <% end %>
+  </table>
