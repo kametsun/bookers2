@@ -8,10 +8,14 @@
   </div>
 
   <p>Image</p>
+  <%= f.file_field :profile_image, accept: "image/*" %>
 
   <div class="field">
     <label>IntroductionI</label>
-
+    <!--Userの自己紹介を入れる-->
   </div>
+
+  <!-- updateボタン -->
+  <%= f.submit "Update User" %>
 
 <% end %>
