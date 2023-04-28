@@ -2,21 +2,18 @@
 
 <%= form_with model: @book, method: :patch do |f| %>
 
-
-  <div class="field">
-    <label>Title</label>
-    <%= f.text_field :title %>
-  </div>
-
-  <div class="field">
-    <label>Opinion</label>
-    <%= f.text_area :body %>
-  </div>
+  <label>Title</label>
+  <br>
+  <%= f.text_field :title %>
+  <br>
+  <label>Opinion</label>
+  <br>
+  <%= f.text_area :body %>
   <br>
 
   <%= f.submit 'Update Book' %>
-
+  <br>
   <%= link_to "Show", book_path(@book.id) %>
-
+|
   <%= link_to "Back", books_path %>
 <% end %>

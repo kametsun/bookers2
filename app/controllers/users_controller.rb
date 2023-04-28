@@ -8,8 +8,8 @@ class UsersController < ApplicationController
 
   #userの詳細
   def show
-    @user = User.find(params[:id])
-    @books = @user.books
+    @user = User.find(current_user.id)
+    @userBooks = Book.where(user_id: current_user.id)
     @new_book = Book.new
   end
 

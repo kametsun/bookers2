@@ -13,6 +13,8 @@
     </tr>
   </tbody>
 </table>
+<!-- user編集ボタン -->
+<%= link_to "Edit", edit_user_path(current_user.id) %>
 
 <!-- createBookのテンプレ -->
 <h2>New book</h2>
@@ -22,5 +24,6 @@
   <br>
   <label>Opinion</label>
   <%= f.text_area :body %>
+  <br>
   <%= f.submit "Create Book" %>
 <% end %>
