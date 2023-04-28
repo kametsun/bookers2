@@ -5,11 +5,27 @@
 
 <div class="user">
   <h2>User info</h2>
-  <p>画像が入る</p>
-  <p><%= @book_detail.user.name %></p>
-  <p>booker</p>
-  <p>introduction</p>
-  <p>設定ボタン</p>
+  <!--User プロフィール画像-->
+  <% if @book_detail.user.profile_image.attached? %>
+    <%= image_tag @book_detail.user.profile_image, size: "200x200" %>
+  <% else %>
+    <%= image_tag 'no_image', size: "200x200" %>
+  <% end %>
+
+  <table class="table">
+    <tbody>
+      <tr>
+        <th>name</th>
+        <th><%= @book_detail.user.name %></th>
+      </tr>
+      <tr>
+        <th>introduction</th>
+        <th> <!--ユーザの自己紹介文が入るようにしろ --></th>
+      </tr>
+    </tbody>
+  </table>
+  <!-- ユーザ編集ボタン -->
+  <%= link_to "Edit", edit_user_path(@book_detail.user.id) %>
 </div>
 
 
@@ -22,13 +38,13 @@
 
     <!-- タイトル -->
     <div class="field">
-      <label for="book_title">Title</label>
+      <label for="book_title">Title</label><br>
       <%= f.text_field :title %>
     </div>
 
     <!-- 感想 -->
     <div class="field">
-      <label for="book_body">Body</label>
+      <label for="book_body">Opinion</label><br>
       <%= f.text_area :body %>
     </div>
 
@@ -40,12 +56,21 @@
 <table>
   <tbody>
     <tr>
-      <td>imageが入る</td>
-      <td><%= @book_detail.user.name %></td>
-      <td><%= @book_detail.title%></td>
+      <td>
+        <!--User プロフィール画像-->
+        <% if @book_detail.user.profile_image.attached? %>
+          <%= image_tag @book_detail.user.profile_image, size: "200x200" %>
+        <% else %>
+          <%= image_tag 'no_image', size: "200x200" %>
+        <% end %>
+      </td>
+      <td><%= link_to @book_detail.user.name, user_path %></td>
+      <!--titleを本の詳細画面にする -->
+      <td><%= link_to @book_detail.title, book_path %></td>
       <td><%= @book_detail.body%></td>
       <td><%= link_to "Edit", edit_book_path(@book_detail) %></td>
-      <td><%= link_to "Destroy", books_path(@book.id), method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
+      <!--削除-->
+      <td><%= link_to "Destroy", books_path, method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
     </tr>
   </tbody>
 </table>

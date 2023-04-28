@@ -1,4 +1,12 @@
 class BooksController < ApplicationController
+
+  def index
+    @user = User.find(current_user.id)
+    #newはワンちゃんいらない=>createで定義すればよい？
+    @book = Book.new
+    @books = Book.all
+  end
+
   def new
     @book = Book.new
   end
@@ -7,7 +15,6 @@ class BooksController < ApplicationController
   def create
     #データを受け取り新規登録するためのインスタンス作成
     @book = Book.new(book_params)
-
     @book.user_id = current_user.id
     #データをDBに保存するためのsaveメソッド実行
     if @book.save
@@ -21,14 +28,9 @@ class BooksController < ApplicationController
     end
   end
 
-  def index
-    @user = current_user
-    @book = Book.new
-    @books = Book.all
-  end
+
 
   def show
-
     @book = Book.new
     @book_detail = Book.find(params[:id])
   end
