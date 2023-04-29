@@ -1,52 +1,4 @@
-<h2>User info</h2>
-
-<!-- ユーザーの詳細 -->
-
-<!--User プロフィール画像-->
-  <% if @currentUser.profile_image.attached? %>
-    <%= image_tag @currentUser.profile_image, size: "200x200" %>
-  <% else %>
-    <%= image_tag 'no_image', size: "200x200" %>
-  <% end %>
-
-<table class="table">
-  <tbody>
-    <tr>
-      <th>name</th>
-      <th><%= @currentUser.name %></th>
-    </tr>
-    <tr>
-      <th>introduction</th>
-      <th> <!--ユーザの自己紹介文が入るようにしろ --></th>
-    </tr>
-  </tbody>
-</table>
-
-<!-- ユーザ編集ボタン -->
-  <%= link_to "Edit", edit_user_path(@currentUser.id) %>
-
-<!-- 本追加 -->
-<h2>New book</h2>
-
-<!-- フォーム -->
-<div class="create_book">
-  <%= form_with model: @newBook, url: '/books', method: :post do |f| %>
-
-    <!-- タイトル -->
-    <div class="field">
-      <label for="book_title">Title</label><br>
-      <%= f.text_field :title %>
-    </div>
-
-    <!-- 感想 -->
-    <div class="field">
-      <label for="book_body">Body</label><br>
-      <%= f.text_area :body %>
-    </div>
-
-  <%= f.submit 'Create Book' %>
-  <% end %>
-</div>
+<%= render partial: 'templates/template', locals: { book: @book , user: @currentUser} %>
 
 <!-- Usersテーブル -->
   <table>
@@ -54,14 +6,15 @@
       <th>image</th>
       <th>name</th>
     </tr>
+
     <!--Userを取り出す-->
     <% @users.each do |user| %>
       <tr>
         <td>
         <% if user.profile_image.attached? %>
-          <%= image_tag user.profile_image, size: "200x200" %>
+          <%= image_tag user.profile_image, size: "80x80" %>
         <% else %>
-          <%= image_tag 'no_image', size: "200x200" %>
+          <%= image_tag 'no_image', size: "80x80" %>
         <% end %>
         </td>
         <td><%= user.name %></td>

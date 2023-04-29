@@ -11,8 +11,9 @@
   <%= f.file_field :profile_image, accept: "image/*" %>
 
   <div class="field">
-    <label>IntroductionI</label>
+    <label>IntroductionI</label><br>
     <!--Userの自己紹介を入れる-->
+    <%= f.text_area :introduction %>
   </div>
 
   <!-- updateボタン -->

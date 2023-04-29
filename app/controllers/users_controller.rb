@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   def index
-    @currentUser = current_user
+    @currentUser = User.find(current_user.id)
     @newBook = Book.new
     @users = User.all
   end
