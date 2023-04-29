@@ -1,25 +1,36 @@
 <!--フラッシュメッセージ作成しろ-->
 
-
-<%= render partial: "templates/template", locals: {book: @new_book, user: @user} %>
-
-<h1>Books</h1>
-<!-- テーブル -->
-  <table>
-    <tr>
-      <th> </th>
-      <th>Title</th>
-      <th>Opinion</th>
-    </tr>
-    <% @userBooks.each do |book| %>
-      <tr>
-        <td>
-          <!--User プロフィール画像-->
-          <%= image_tag book.user.get_profile_image(80, 80) %>
-        </td>
-        <!--titleを本の詳細画面にする -->
-        <td><%= link_to book.title, book_path(book.id) %></td>
-        <td><%= book.body %></td>
-      </tr>
-    <% end %>
-  </table>
+<div class="container px-5 px-sm-0 mt-3">
+  <div class="row">
+    <div class="col-md-3">
+      <%= render partial: "templates/template", locals: {book: @new_book, user: @user} %>
+    </div>
+    <div class="col-md-8 offset-md-1">
+      <h1>Books</h1>
+      <!-- テーブル -->
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th> </th>
+            <th>Title</th>
+            <th>Opinion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @userBooks.each do |book| %>
+            <tr>
+              <td>
+                <!--User プロフィール画像-->
+                <%= link_to user_path(book.user_id) do %>
+                  <%= image_tag book.user.get_profile_image(80, 80) %>
+                <% end %>
+              </td>
+              <!--titleを本の詳細画面にする -->
+              <td><%= link_to book.title, book_path(book.id) %></td>
+              <td><%= book.body %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>

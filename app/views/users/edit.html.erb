@@ -1,22 +1,27 @@
-<h2>User info</h2>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto mt-3">
+      <h2>User info</h2>
+      <%= form_with model: @user, method: :patch do |f| %>
 
-<%= form_with model: @user, method: :patch do |f| %>
-
-  <div class="field">
-    <label>Name</label><br>
-    <%= f.text_field :name %>
+        <div class="form-group">
+          <label class="form-label">Name</label>
+          <%= f.text_field :name, class:"form-control" %>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Image</label>
+          <%= f.file_field :profile_image, accept: "image/*",class:"form-control-file" %>
+        </div>
+        <div class="form-group">
+          <label class="form-label">IntroductionI</label>
+          <!--Userの自己紹介を入れる-->
+          <%= f.text_area :introduction, class:"form-control" %>
+        </div>
+        <div class="actions">
+          <!-- updateボタン -->
+          <%= f.submit "Update User", class: "btn btn-secondary" %>
+        </div>
+      <% end %>
+    </div>
   </div>
-
-  <p>Image</p>
-  <%= f.file_field :profile_image, accept: "image/*" %>
-
-  <div class="field">
-    <label>IntroductionI</label><br>
-    <!--Userの自己紹介を入れる-->
-    <%= f.text_area :introduction %>
-  </div>
-
-  <!-- updateボタン -->
-  <%= f.submit "Update User" %>
-
-<% end %>
+</div>
