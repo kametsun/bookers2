@@ -15,21 +15,23 @@
           <tr>
             <td style="display: flex; flex-direction: colum;">
               <!--User プロフィール画像-->
-              <%= image_tag @book_detail.user.profile_image, size: "80x80" %>
-              <%= link_to @book_detail.user.name, user_path(@book_detail.user.id) %>
+              <%= link_to user_path(@book_detail.user.id) do %>
+                <%= image_tag @book_detail.user.profile_image, size: "80x80" %>
+                <%= @book_detail.user.name %>
+              <% end %>
             </td>
             <!--titleを本の詳細画面にする -->
             <td><%= link_to @book_detail.title, book_path(@book_detail.id) %></td>
             <td><%= @book_detail.body%></td>
             <% if @book_detail.user_id  == current_user.id %>
               <td>
-                <%= link_to "Edit", edit_book_path(@book_detail.id) %>
+                <%= link_to "Edit", edit_book_path(@book_detail.id), class:"btn btn-success" %>
               </td>
             <% end %>
             <!--削除-->
             <% if @book_detail.user_id  == current_user.id %>
               <td>
-                <%= link_to "Destroy", book_path(@book_detail.id), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+                <%= link_to "Destroy", book_path(@book_detail.id), class: "btn btn-sm btn-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %>
               </td>
             <% end %>
           </tr>
