@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>Bookers2</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1, maximum-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -11,47 +11,41 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
-    <header>
-    <% if user_signed_in? %>
-
-      <li>
-        <%= link_to "Home", root_path %>
-      </li>
-
-      <li>
-        <%= link_to "Users", users_path %>
-      </li>
-
-      <li>
-        <%= link_to "Books", books_path %>
-      </li>
-
-      <li>
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-      </li>
-    <% else %>
-
-      <li>
-        <%= link_to "Home", root_path %>
-      </li>
-
-      <li>
-        <%= link_to "About", homes_about_path %>
-      </li>
-
-      <li>
-        <%= link_to "Sign Up", new_user_registration_path %>
-      </li>
-      <li>
-        <%= link_to "ログイン", new_user_session_path %>
-      </li>
-    <% end %>
+  <body class="d-flex flex-column vh-100">
+    <header class="bg-dark text-light">
+      <nav class="navbar navbar-expand-lg navbar-light custom-hamburger">
+        <div class="container">
+          <a href="<%= destroy_user_session_path %>" data-method="delete" class="navbar-brand text-light">Bookers</a>
+        <button class="navbar-toggler border-secondary" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ml-auto">
+            <% if user_signed_in? %>
+              <a href="<%= user_path(current_user.id) %>" class="nav-link text-light"><span class="fas fa-home"></span> Home</a>
+              <a href="<%= users_path %>" class="nav-link text-light"><span class="fas fa-users"></span> Users</a>
+              <a href="<%= books_path %>" class="nav-link text-light"><span class="fas fa-book-open"></span> Books</a>
+              <a href="<%= destroy_user_session_path %>" data-method="delete" class="nav-link text-light"><span class="fas fa-sign-out-alt"></span> Log out</a>
+            <% else %>
+              <a href="<%= root_path %>" class="nav-link text-light"><span class="fas fa-home"></span> Home</a>
+              <a href="<%= homes_about_path %>" class="nav-link text-light"><span class="fas fa-link"></span> About</a>
+              <a href="<%= new_user_registration_path %>" class="nav-link text-light"><span class="fas fa-user-plus"></span> Sign up</a>
+              <a href="<%= new_user_session_path %>" class="nav-link text-light"><span class="fas fa-sign-in-alt"></span> Log in</a>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </nav>
   </header>
     <%= yield %>
-  </body>
-
   <footer>
-    <p>CopyRight Infratop.inc</p>
+    <div class="containermt-5">
+      <div class="row">
+        <div class="mx-auto">
+          <p>CopyRight Infratop.inc</p>
+        </div>
+      </div>
+    </div>
   </footer>
+  </body>
 </html>

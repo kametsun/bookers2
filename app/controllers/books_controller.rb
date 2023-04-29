@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  before_action :is_matching_login_user, only: [:edit, :update, :destroy]
 
   def index
     @user = User.find(current_user.id)
@@ -7,6 +8,7 @@ class BooksController < ApplicationController
     @books = Book.all
   end
 
+  #使わない
   def new
     @book = Book.new
   end
@@ -31,7 +33,7 @@ class BooksController < ApplicationController
 
 
   def show
-    @user = User.find(current_user.id)
+    @user = User.find(@book_detail.user_id)
     @book = Book.new
     @book_detail = Book.find(params[:id])
   end
@@ -47,8 +49,9 @@ class BooksController < ApplicationController
     if @book.update(book_params)
       #フラッシュメッセージ送信
       flash[:notice] = "Book was successfully updated."
-      redirect_to book_path
+      redirect_to book_path(@book.id)
     else
+      flash[:danger] = "失敗"
       render :edit
     end
   end
@@ -66,6 +69,14 @@ class BooksController < ApplicationController
 
   # 投稿データのストロングパラメータ
   private
+
+    def is_matching_login_user
+      book = Book.find(params[:id])
+      unless book.user_id == current_user.id
+        redirect_to books_path
+      end
+    end
+
 
   def book_params
     params.require(:book).permit(:title, :body)
