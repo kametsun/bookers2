@@ -25,6 +25,7 @@ class BooksController < ApplicationController
       #booksの詳細画面へリダイレクトしたい
       redirect_to book_path(@book.id)
     else
+      flash[:notice] = "空"
       @books = Book.all
       render :index
     end
@@ -51,7 +52,7 @@ class BooksController < ApplicationController
       flash[:notice] = "Book was successfully updated."
       redirect_to book_path(@book.id)
     else
-      flash[:danger] = "失敗"
+      flash[:notice] = "失敗"
       render :edit
     end
   end
