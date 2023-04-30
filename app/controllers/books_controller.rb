@@ -21,13 +21,12 @@ class BooksController < ApplicationController
     #データをDBに保存するためのsaveメソッド実行
     if @book.save
       #フラッシュメッセージ送信
-      flash[:notice] = "Book was successfully created."
+      flash[:notice] = "You have created book successfully."
       #booksの詳細画面へリダイレクトしたい
       redirect_to book_path(@book.id)
     else
-      flash[:notice] = "空"
-      @books = Book.all
-      render :index
+      flash[:notice] = "can't be blank"
+      redirect_to books_path
     end
   end
 
@@ -49,10 +48,10 @@ class BooksController < ApplicationController
     #アップデートする
     if @book.update(book_params)
       #フラッシュメッセージ送信
-      flash[:notice] = "Book was successfully updated."
+      flash[:notice] = "You have updated book successfully."
       redirect_to book_path(@book.id)
     else
-      flash[:notice] = "失敗"
+      flash[:notice] = "error"
       render :edit
     end
   end
@@ -61,11 +60,8 @@ class BooksController < ApplicationController
     #データを１件取得
     book = Book.find(params[:id])
     #データを削除
-    if book.destroy
-      #フラッシュメッセージ送信
-      flash[:notice] = "Book was successfully destroyed."
-      redirect_to books_path
-    end
+    book.destroy
+    redirect_to books_path
   end
 
   # 投稿データのストロングパラメータ

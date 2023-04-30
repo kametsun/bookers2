@@ -24,10 +24,10 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      flash[:notice] = "アップデートに成功"
+      flash[:notice] = "You have updated user successfully."
       redirect_to user_path(@user.id)
     else
-      flash[:notice] = "２文字以上入力してください。"
+      flash[:notice] = "is too short (minimum is 2 characters)"
       render :edit
     end
   end
