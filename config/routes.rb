@@ -1,9 +1,16 @@
 Rails.application.routes.draw do
 
+  #resources :homes
   root to: 'homes#top'
   get 'home/about' => 'homes#about'
-  #resources :homes
+
   devise_for :users
-  resources :books, only: [:index, :show, :create, :edit, :update, :destroy]
+  
+  #booksにいいねとコメントを結びつける
+  resources :books, only: [:show, :create, :edit, :update, :index, :destroy] do
+    resource :favorites, only: [:create, :destroy]
+    resource :book_comments, only: [:create, :destroy]
+  end
   resources :users, only: [:index, :show, :update, :edit]
+
 end

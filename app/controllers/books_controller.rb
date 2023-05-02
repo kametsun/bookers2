@@ -6,6 +6,7 @@ class BooksController < ApplicationController
     #newはワンちゃんいらない=>createで定義すればよい？
     @book = Book.new
     @books = Book.all
+    #@book_comment = Book.new
   end
 
   #使わない
@@ -36,6 +37,7 @@ class BooksController < ApplicationController
     @book_detail = Book.find(params[:id])
     @user = User.find(@book_detail.user_id)
     @book = Book.new
+    @book_comment = BookComment.new
   end
 
   def edit
