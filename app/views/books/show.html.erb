@@ -64,7 +64,7 @@
             <td>
               <% if current_user.id == book_comment.user_id %>
                 <div class="col-md-2">
-                  <%= link_to 'Destroy', book_book_comments_path(book_comment.book, book_comment), method: :delete, class:"btn btn-danger" %>
+                  <%= link_to 'Destroy', book_book_comment_path(book_comment.book, book_comment), method: :delete, class:"btn btn-danger" %>
                 </div>
               <% end %>
             </td>
